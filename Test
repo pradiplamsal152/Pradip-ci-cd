@@ -1,0 +1,28 @@
+# Create a local project directory
+mkdir dotnet-ci-cd-demo
+cd dotnet-ci-cd-demo
+
+# Initialize git repository
+git init
+git branch -M main
+
+# Create Program.cs
+Set-Content Program.cs 'var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+app.MapGet("/", () => "Hello from GitHub CI/CD Pipeline! App version: 1.0.0");
+app.Run();'
+
+# Create project file
+Set-Content dotnet-ci-cd-demo.csproj '<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+</Project>'
+
+# Commit and push to GitHub
+git add .
+git commit -m "Initial .NET Core application commit"
+git remote add origin https://github.com/YOUR-USERNAME/dotnet-ci-cd-demo.git
+git push -u origin main
